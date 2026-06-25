@@ -1,0 +1,13 @@
+<div class="page-container">
+  <h1 class="page-title">{{ page.title | upcase }}</h1>
+  <div class="page-content-wrapper rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "settings": []
+}
+{% endschema %}

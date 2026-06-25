@@ -1,0 +1,12 @@
+{
+  "name": "search",
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

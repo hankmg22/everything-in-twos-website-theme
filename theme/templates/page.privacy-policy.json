@@ -1,0 +1,12 @@
+{
+  "name": "Privacy Policy",
+  "sections": {
+    "main": {
+      "type": "page-privacy",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,67 @@
+<div class="cart-page-container">
+  <h1 class="cart-page-title">YOUR CART</h1>
+  
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-empty-message">
+      <p>YOUR CART IS EMPTY</p>
+      <a href="/" class="continue-shopping-link">CONTINUE SHOPPING</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-page-form">
+      <div class="cart-page-items">
+        {%- for item in cart.items -%}
+          <div class="cart-page-item" data-key="{{ item.key }}">
+            <div class="cart-item-image">
+              {%- if item.image != blank -%}
+                <img src="{{ item.image | image_url: width: 300 }}" 
+                     alt="{{ item.title | escape }}" 
+                     loading="lazy" 
+                     width="150" 
+                     height="150">
+              {%- else -%}
+                <div class="cart-item-placeholder"></div>
+              {%- endif -%}
+            </div>
+            
+            <div class="cart-item-details">
+              <h2>{{ item.product.title | upcase }}</h2>
+              
+              {%- unless item.product.has_only_default_variant -%}
+                <p class="cart-item-variant">{{ item.variant.title | upcase }}</p>
+              {%- endunless -%}
+              
+              <div class="cart-item-price">{{ item.final_line_price | money }}</div>
+              
+              <div class="cart-item-quantity">
+                <label for="updates_{{ item.key }}" class="visually-hidden">Quantity</label>
+                <input type="number" 
+                       name="updates[]" 
+                       id="updates_{{ item.key }}"
+                       value="{{ item.quantity }}" 
+                       min="0" 
+                       class="qty-input">
+              </div>
+              
+              <a href="{{ item.url_to_remove }}" class="remove-item-link">REMOVE</a>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      
+      <div class="cart-page-footer">
+        <div class="cart-subtotal">
+          <span class="subtotal-label">SUBTOTAL:</span>
+          <span class="subtotal-price">{{ cart.total_price | money }}</span>
+        </div>
+        <button type="submit" name="checkout" class="cart-checkout-btn">CHECKOUT</button>
+      </div>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page Content",
+  "settings": []
+}
+{% endschema %}

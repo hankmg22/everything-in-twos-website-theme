@@ -1,0 +1,89 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-newsletter">
+      <h3 class="newsletter-title">{{ section.settings.newsletter_title | upcase }}</h3>
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-input-group">
+          <input
+            type="email"
+            name="contact[email]"
+            class="newsletter-email"
+            value="{{ form.email }}"
+            placeholder="ENTER EMAIL ADDRESS"
+            autocorrect="off"
+            autocapitalize="off"
+            required
+          >
+          <button type="submit" class="newsletter-submit-btn">
+            SUBMIT
+          </button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter-success">THANKS FOR SUBSCRIBING!</p>
+        {%- endif -%}
+      {% endform %}
+    </div>
+
+    <div class="footer-contact">
+      <h3 class="footer-contact-title">CONTACT US</h3>
+      {% form 'contact', class: 'footer-contact-form' %}
+        {%- if form.posted_successfully? -%}
+          <p class="contact-success">THANKS! WE WILL GET BACK TO YOU SOON.</p>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="contact-errors">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+          <div class="contact-fields">
+            <input type="text" name="contact[name]" placeholder="NAME" required>
+            <input type="email" name="contact[email]" placeholder="EMAIL ADDRESS" required>
+          </div>
+          <div class="contact-message-group">
+            <textarea name="contact[body]" placeholder="MESSAGE" rows="3" required></textarea>
+            <button type="submit" class="contact-submit-btn">SEND</button>
+          </div>
+        {%- endif -%}
+      {% endform %}
+    </div>
+
+    <div class="footer-nav-and-info">
+      <ul class="footer-links">
+        <li><a href="/pages/terms-of-service">TERMS OF SERVICE</a></li>
+        <li><a href="/pages/privacy-policy">PRIVACY POLICY</a></li>
+        <li><a href="/pages/shipping-and-returns">SHIPPING & RETURNS</a></li>
+      </ul>
+
+      <div class="footer-copyright">
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name | upcase }}. EVERYTHING IN TWOS.<br>
+        <span class="footer-easter-egg">PROUDLY UNLIABLE FOR UNDERGROUND CHUD ABDUCTIONS.</span>
+      </div>
+
+      {%- if settings.social_twitter_link != blank or settings.social_instagram_link != blank -%}
+        <div class="footer-socials">
+          {%- if settings.social_twitter_link != blank -%}
+            <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" class="social-link">TWITTER</a>
+          {%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}
+            <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" class="social-link">INSTAGRAM</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Heading",
+      "default": "SUBSCRIBE FOR DROP UPDATES"
+    }
+  ]
+}
+{% endschema %}

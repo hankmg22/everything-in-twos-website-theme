@@ -1,0 +1,30 @@
+{
+  "general": {
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "This drop is already gone.",
+      "link": "Back to Drop"
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "ADD TO CART",
+      "sold_out": "SOLD OUT",
+      "unavailable": "UNAVAILABLE",
+      "quantity": "Quantity",
+      "size": "Size"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "CART",
+      "empty": "YOUR CART IS EMPTY",
+      "checkout": "CHECKOUT",
+      "subtotal": "Subtotal",
+      "remove": "Remove"
+    }
+  }
+}

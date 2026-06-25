@@ -1,0 +1,93 @@
+<div class="B__container">
+  <div class="single-product-container">
+    <div class="product-section-inner">
+      
+      <!-- Left Media Column -->
+      <div class="product-image-wrapper">
+        <div class="product-image-container">
+          {%- if product.images.size > 1 -%}
+            <img src="{{ product.featured_image | image_url: width: 1200 }}" 
+                 alt="{{ product.title | escape }}" 
+                 class="product-image-primary"
+                 width="600"
+                 height="600">
+            <img src="{{ product.images[1] | image_url: width: 1200 }}" 
+                 alt="{{ product.title | escape }}" 
+                 class="product-image-secondary"
+                 width="600"
+                 height="600">
+          {%- else -%}
+            <img src="{{ product.featured_image | image_url: width: 1200 }}" 
+                 alt="{{ product.title | escape }}" 
+                 class="product-image-primary"
+                 width="600"
+                 height="600">
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Right Form & Details Column -->
+      <div class="product-details-wrapper">
+        <div class="product-header-info">
+          <h1 class="product-title-heading">{{ product.title | upcase }}</h1>
+          <div class="product-price-tag">{{ product.selected_or_first_available_variant.price | money }}</div>
+        </div>
+
+        {%- form 'product', product, class: 'product-ajax-form', data-product-id: product.id -%}
+          
+          <!-- Custom Transparent Select Wrapper -->
+          {%- if product.variants.size > 0 -%}
+            <div class="PI__select_wrap">
+              <div class="PI__placeholder">
+                <span class="PI__placeholder-text">CHOOSE SIZE</span>
+                <select name="id" class="PI__select" id="VariantSelect-{{ product.id }}">
+                  {%- for variant in product.variants -%}
+                    <option value="{{ variant.id }}" 
+                            data-available="{{ variant.available }}" 
+                            data-price="{{ variant.price }}" 
+                            data-price-formatted="{{ variant.price | money }}"
+                            {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                      {{ variant.title | escape }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            </div>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- endif -%}
+
+          <!-- Add to Cart Submit button -->
+          <div class="add-to-cart-action-group">
+            <button type="submit" name="add" class="add-to-cart-submit-btn" 
+                    {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+              {%- if product.selected_or_first_available_variant.available -%}
+                ADD TO CART
+              {%- else -%}
+                SOLD OUT
+              {%- endif -%}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <!-- Expandable details disclosure -->
+        {%- if product.description != blank -%}
+          <div class="product-desc-accordion">
+            <button type="button" class="desc-accordion-toggle">DETAILS</button>
+            <div class="desc-accordion-content">
+              <div class="desc-text">{{ product.description }}</div>
+            </div>
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Page Content",
+  "settings": []
+}
+{% endschema %}

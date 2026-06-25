@@ -1,0 +1,64 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    <link rel="icon" type="image/png" href="{{ 'logo-favicon.png' | asset_url }}">
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <!-- Social Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ shop.name | escape }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | escape }}">
+    <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
+
+    <!-- Product Image Hover Preloader -->
+    {%- if template.name == 'index' or template.name == 'collection' -%}
+      {%- for product in collections.all.products limit: 12 -%}
+        {%- if product.images.size > 1 -%}
+          <link rel="preload" as="image" href="{{ product.images[1] | image_url: width: 800 }}">
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+  </head>
+
+  <body class="template-{{ template.name }}">
+    <a class="skip-to-content-link visually-hidden" href="#MainContent">
+      {{ "general.accessibility.skip_to_content" | t }}
+    </a>
+
+    {% section 'header' %}
+
+    <main id="MainContent" class="content-for-layout" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+    {% section 'cart-drawer' %}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </body>
+</html>

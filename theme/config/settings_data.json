@@ -1,0 +1,18 @@
+{
+  "current": {
+    "color_bg": "#ffffff",
+    "color_text": "#111111",
+    "color_accent": "#39FF14",
+    "social_twitter_link": "https://twitter.com/everythingintwos",
+    "social_instagram_link": "https://instagram.com/everythingintwos"
+  },
+  "presets": {
+    "Default": {
+      "color_bg": "#ffffff",
+      "color_text": "#111111",
+      "color_accent": "#39FF14",
+      "social_twitter_link": "https://twitter.com/everythingintwos",
+      "social_instagram_link": "https://instagram.com/everythingintwos"
+    }
+  }
+}

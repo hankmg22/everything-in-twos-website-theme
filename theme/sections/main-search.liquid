@@ -1,0 +1,49 @@
+<div class="search-page-container">
+  <h1 class="search-page-title">SEARCH</h1>
+  <form action="/search" method="get" role="search" class="search-form">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="SEARCH OUR VAULT..." class="search-input">
+    <button type="submit" class="search-submit-btn">GO</button>
+  </form>
+
+  {%- if search.performed -%}
+    <div class="search-results-summary">
+      {%- if search.results_count == 0 -%}
+        <p>NO RESULTS FOUND FOR "{{ search.terms | escape }}".</p>
+      {%- else -%}
+        <p>FOUND {{ search.results_count }} RESULTS FOR "{{ search.terms | escape }}":</p>
+      {%- endif -%}
+    </div>
+
+    {%- if search.results_count > 0 -%}
+      <div class="search-results-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            <div class="search-result-item">
+              <a href="{{ item.url }}" class="search-result-link">
+                {%- if item.featured_image != blank -%}
+                  <img src="{{ item.featured_image | image_url: width: 400 }}" 
+                       alt="{{ item.title | escape }}" 
+                       loading="lazy" 
+                       width="200" 
+                       height="200"
+                       class="search-result-img">
+                {%- else -%}
+                  <div class="search-result-img-placeholder"></div>
+                {%- endif -%}
+                <h3 class="search-result-item-title">{{ item.title | upcase }}</h3>
+                <span class="search-result-item-price">{{ item.price | money }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search Page Content",
+  "settings": []
+}
+{% endschema %}

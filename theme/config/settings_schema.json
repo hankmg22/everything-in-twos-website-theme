@@ -1,0 +1,48 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "EverythingInTwos CHUD Drop Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigravity (DeepMind Advanced Agentic Coding)",
+    "theme_documentation_url": "https://everythingintwos.com",
+    "theme_support_url": "https://everythingintwos.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (CHUD Green)",
+        "default": "#39FF14"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter Link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram Link"
+      }
+    ]
+  }
+]

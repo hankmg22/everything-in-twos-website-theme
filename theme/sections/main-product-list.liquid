@@ -1,0 +1,74 @@
+<div class="B__container">
+  <div class="ProductGrid" data-per="5">
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- assign products = collection.products | default: collections.all.products -%}
+
+    {%- if products.size > 0 -%}
+      {%- for product in products -%}
+        <a href="{{ product.url }}" class="ProductGridItem js-hover-show-second" id="ProductItem-{{ product.id }}">
+          <div class="PGI__img_wrap">
+            {%- if product.featured_image != blank -%}
+              <img src="{{ product.featured_image | image_url: width: 800 }}" 
+                   alt="{{ product.title | escape }}" 
+                   class="PGI__img" 
+                   {% if forloop.index > 4 %}loading="lazy"{% else %}fetchpriority="high"{% endif %}
+                   width="300"
+                   height="300">
+            {%- else -%}
+              <div class="PGI__img-placeholder"></div>
+            {%- endif -%}
+            
+            {%- if product.images.size > 1 -%}
+              <img src="{{ product.images[1] | image_url: width: 800 }}" 
+                   alt="{{ product.title | escape }}" 
+                   class="PGI__img_2" 
+                   loading="lazy"
+                   width="300"
+                   height="300">
+            {%- else -%}
+              <img src="{{ product.featured_image | image_url: width: 800 }}" 
+                   alt="{{ product.title | escape }}" 
+                   class="PGI__img_2" 
+                   loading="lazy"
+                   width="300"
+                   height="300">
+            {%- endif -%}
+          </div>
+          
+          <h3 class="PGI__title">{{ product.title | upcase }}</h3>
+          
+          <div class="PGI__price">
+            {%- if product.available -%}
+              {%- if product.price_varies -%}
+                FROM {{ product.price_min | money }}
+              {%- else -%}
+                {{ product.price | money }}
+              {%- endif -%}
+            {%- else -%}
+              <span class="PGI__sold_out">SOLD OUT</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      <!-- Empty state -->
+      <div class="shop-empty-state" style="text-align: center; width: 100%; padding: 100px 0;">
+        <div class="crt-glow-text warning">CHUD DROP LOADING...</div>
+        <p style="margin-top: 20px;">WE ARE CURRENTLY PREPARING THE VAULT. CHECK BACK IN A MOMENT.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Product Grid",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

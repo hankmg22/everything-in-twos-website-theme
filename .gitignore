@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Local preview formatting scratch files
+scratch/formatted_main.css
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
