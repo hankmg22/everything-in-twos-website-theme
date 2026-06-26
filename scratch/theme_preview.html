@@ -1070,21 +1070,21 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
       }
       
       .newsletter-popup-content {
         position: relative;
-        background-color: #000000;
-        border: 1px solid var(--color-accent);
+        background-color: #ffffff;
+        border: 1px solid #111111;
         padding: 50px 40px;
         width: 90%;
         max-width: 500px;
         z-index: 3001;
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 45px rgba(0, 0, 0, 0.15);
       }
       
       .newsletter-popup-close-btn {
@@ -1094,14 +1094,14 @@
         background: none;
         border: none;
         font-size: 28px;
-        color: #ffffff;
+        color: #111111;
         cursor: pointer;
         line-height: 1;
-        transition: color 0.2s ease, transform 0.2s ease;
+        transition: opacity 0.2s ease, transform 0.2s ease;
       }
       
       .newsletter-popup-close-btn:hover {
-        color: var(--color-accent);
+        opacity: 0.7;
         transform: scale(1.1);
       }
       
@@ -1119,7 +1119,7 @@
       .popup-title {
         font-family: var(--font-heading);
         font-size: 32px;
-        color: #ffffff;
+        color: #111111;
         margin-bottom: 12px;
         letter-spacing: -0.01em;
         font-weight: normal;
@@ -1127,7 +1127,7 @@
       
       .popup-subtitle {
         font-size: 13px;
-        color: #999999;
+        color: #666666;
         line-height: 1.5;
         margin-bottom: 30px;
         letter-spacing: 0.05em;
@@ -1148,28 +1148,28 @@
       .popup-email-input {
         background: none;
         border: none;
-        border-bottom: 1px solid #ffffff;
+        border-bottom: 1px solid #111111;
         padding: 12px 5px;
         font-family: inherit;
         font-size: 14px;
-        color: #ffffff;
+        color: #111111;
         text-transform: uppercase;
         text-align: center;
         width: 100%;
-        transition: border-bottom-color 0.2s ease;
+        transition: opacity 0.2s ease;
       }
       
       .popup-email-input:focus {
         outline: none;
-        border-bottom-color: var(--color-accent);
+        border-bottom-width: 2px;
       }
       
       .popup-submit-btn, .popup-action-btn {
         width: 100%;
         padding: 14px;
         background-color: transparent;
-        color: #ffffff;
-        border: 1px solid #ffffff;
+        color: #111111;
+        border: 1px solid #111111;
         font-family: var(--font-body);
         font-size: 14px;
         text-transform: uppercase;
@@ -1179,15 +1179,15 @@
       }
       
       .popup-submit-btn:hover, .popup-action-btn:hover {
-        background-color: var(--color-accent);
-        color: #000000;
-        border-color: var(--color-accent);
+        background-color: #111111;
+        color: #ffffff;
+        border-color: #111111;
       }
       
       .popup-dismiss-text {
         background: none;
         border: none;
-        color: #999999;
+        color: #666666;
         font-family: inherit;
         font-size: 11px;
         text-transform: uppercase;
@@ -1199,7 +1199,7 @@
       }
       
       .popup-dismiss-text:hover {
-        color: #ffffff;
+        color: #111111;
       }
     </style>
   </head>
@@ -1483,8 +1483,8 @@
           document.getElementById('PopupSuccessView').style.display = 'block';
         }
 
-        document.getElementById('PopupCloseBtn')?.addEventListener('click', closePopup);
-        document.getElementById('PopupBackdrop')?.addEventListener('click', closePopup);
+        document.getElementById('PopupCloseBtn')?.addEventListener('click', dismissPopup);
+        document.getElementById('PopupBackdrop')?.addEventListener('click', dismissPopup);
         document.getElementById('PopupDismissText')?.addEventListener('click', dismissPopup);
         document.getElementById('PopupSuccessClose')?.addEventListener('click', closePopup);
       }
