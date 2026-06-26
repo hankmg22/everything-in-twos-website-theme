@@ -28,6 +28,7 @@
     <div class="footer-contact">
       <h3 class="footer-contact-title">CONTACT US</h3>
       {% form 'contact', class: 'footer-contact-form' %}
+        <input type="hidden" name="return_to" value="{{ canonical_url }}">
         {%- if form.posted_successfully? -%}
           <p class="contact-success">THANKS! WE WILL GET BACK TO YOU SOON.</p>
         {%- else -%}
