@@ -35,11 +35,6 @@
     "settings": [
       {
         "type": "text",
-        "id": "social_twitter_link",
-        "label": "Twitter Link"
-      },
-      {
-        "type": "text",
         "id": "social_instagram_link",
         "label": "Instagram Link"
       }

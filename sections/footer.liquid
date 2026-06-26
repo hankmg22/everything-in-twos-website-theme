@@ -61,14 +61,9 @@
         <span class="footer-easter-egg">PROUDLY UNLIABLE FOR UNDERGROUND CHUD ABDUCTIONS.</span>
       </div>
 
-      {%- if settings.social_twitter_link != blank or settings.social_instagram_link != blank -%}
+      {%- if settings.social_instagram_link != blank -%}
         <div class="footer-socials">
-          {%- if settings.social_twitter_link != blank -%}
-            <a href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener" class="social-link">TWITTER</a>
-          {%- endif -%}
-          {%- if settings.social_instagram_link != blank -%}
-            <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" class="social-link">INSTAGRAM</a>
-          {%- endif -%}
+          <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" class="social-link">INSTAGRAM</a>
         </div>
       {%- endif -%}
     </div>
