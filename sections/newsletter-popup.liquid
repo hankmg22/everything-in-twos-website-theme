@@ -1,0 +1,292 @@
+{%- unless section.settings.enable == false -%}
+  <div id="NewsletterPopup" class="newsletter-popup" role="dialog" aria-modal="true" style="display: none;">
+    <div class="newsletter-popup-backdrop" id="PopupBackdrop"></div>
+    <div class="newsletter-popup-content">
+      <button type="button" class="newsletter-popup-close-btn" id="PopupCloseBtn" aria-label="Close popup">&times;</button>
+      
+      <div class="newsletter-popup-inner">
+        {%- form 'customer', id: 'ContactPopupForm', class: 'popup-newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter, 10-off-popup">
+          <input type="hidden" name="return_to" value="{{ canonical_url }}?customer_posted=true">
+
+          {%- if form.posted_successfully? -%}
+            <div class="popup-success-view">
+              <h2 class="popup-title">SUBMITTED!</h2>
+              <p class="popup-subtitle">CHECK YOUR EMAIL FOR YOUR 10% OFF DISCOUNT CODE.</p>
+              <button type="button" class="popup-action-btn close-popup-success" id="PopupSuccessClose">START SHOPPING</button>
+            </div>
+            <script>
+              localStorage.setItem('ei2-popup-subscribed', 'true');
+            </script>
+          {%- else -%}
+            <div class="popup-input-view">
+              <h2 class="popup-title">{{ section.settings.title | upcase }}</h2>
+              <p class="popup-subtitle">{{ section.settings.subtitle | upcase }}</p>
+              
+              {%- if form.errors -%}
+                <div class="popup-form-errors">
+                  {{ form.errors | default_errors }}
+                </div>
+              {%- endif -%}
+
+              <div class="popup-fields">
+                <input
+                  type="email"
+                  name="contact[email]"
+                  class="popup-email-input"
+                  placeholder="ENTER EMAIL ADDRESS"
+                  value="{{ form.email }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  required
+                >
+                <button type="submit" class="popup-submit-btn">SUBSCRIBE</button>
+              </div>
+              <button type="button" class="popup-dismiss-text" id="PopupDismissText">NO THANKS</button>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .newsletter-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .newsletter-popup-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .newsletter-popup-content {
+      position: relative;
+      background-color: #000000;
+      border: 1px solid var(--color-accent);
+      padding: 50px 40px;
+      width: 90%;
+      max-width: 500px;
+      z-index: 3001;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .newsletter-popup-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #ffffff;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    
+    .newsletter-popup-close-btn:hover {
+      color: var(--color-accent);
+      transform: scale(1.1);
+    }
+    
+    .newsletter-popup-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .popup-newsletter-form {
+      width: 100%;
+    }
+    
+    .popup-title {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      font-weight: normal;
+    }
+    
+    .popup-subtitle {
+      font-size: 13px;
+      color: #999999;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      letter-spacing: 0.05em;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .popup-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto 20px auto;
+    }
+    
+    .popup-email-input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid #ffffff;
+      padding: 12px 5px;
+      font-family: inherit;
+      font-size: 14px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+      transition: border-bottom-color 0.2s ease;
+    }
+    
+    .popup-email-input:focus {
+      outline: none;
+      border-bottom-color: var(--color-accent);
+    }
+    
+    .popup-submit-btn, .popup-action-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: transparent;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      font-family: var(--font-body);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    
+    .popup-submit-btn:hover, .popup-action-btn:hover {
+      background-color: var(--color-accent);
+      color: #000000;
+      border-color: var(--color-accent);
+    }
+    
+    .popup-dismiss-text {
+      background: none;
+      border: none;
+      color: #999999;
+      font-family: inherit;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+      margin-top: 10px;
+    }
+    
+    .popup-dismiss-text:hover {
+      color: #ffffff;
+    }
+    
+    .popup-form-errors {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const popup = document.getElementById('NewsletterPopup');
+      if (!popup) return;
+
+      const hasSubscribed = localStorage.getItem('ei2-popup-subscribed');
+      const hasDismissed = localStorage.getItem('ei2-popup-dismissed');
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const isPostedSuccess = urlParams.get('customer_posted') === 'true' || 
+                              document.querySelector('.popup-success-view') !== null;
+
+      if (isPostedSuccess) {
+        popup.style.display = 'flex';
+        localStorage.setItem('ei2-popup-subscribed', 'true');
+        
+        if (urlParams.get('customer_posted') === 'true') {
+          const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+          window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+        }
+      } else if (!hasSubscribed && !hasDismissed) {
+        const delaySeconds = parseInt('{{ section.settings.delay_seconds }}') || 3;
+        setTimeout(() => {
+          popup.style.display = 'flex';
+        }, delaySeconds * 1000);
+      }
+
+      function closePopup() {
+        popup.style.display = 'none';
+      }
+
+      function dismissPopup() {
+        closePopup();
+        localStorage.setItem('ei2-popup-dismissed', 'true');
+      }
+
+      document.getElementById('PopupCloseBtn')?.addEventListener('click', closePopup);
+      document.getElementById('PopupBackdrop')?.addEventListener('click', closePopup);
+      document.getElementById('PopupDismissText')?.addEventListener('click', dismissPopup);
+      
+      document.getElementById('PopupSuccessClose')?.addEventListener('click', function() {
+        closePopup();
+      });
+    });
+  </script>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Newsletter Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable Popup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Popup Title",
+      "default": "GET 10% OFF"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Popup Subtitle",
+      "default": "SUBSCRIBE TO GET DROP UPDATES, DISCOUNTS AND EXCLUSIVE ITEMS DIRECTLY TO YOUR INBOX"
+    },
+    {
+      "type": "range",
+      "id": "delay_seconds",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay Before Showing",
+      "default": 3
+    }
+  ]
+}
+{% endschema %}
