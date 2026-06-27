@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
+    {%- assign shop_name = shop.name | replace: 'everythingintwos', 'TwoTism' | replace: 'Everythingintwos', 'TwoTism' | replace: 'EverythingIntwos', 'TwoTism' | replace: 'everything-in-twos', 'TwoTism' | replace: 'Everything In Twos', 'TwoTism' | replace: 'Everything in Twos', 'TwoTism' | replace: 'EVERYTHINGINTWOS', 'TWOTISM' -%}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -14,7 +15,7 @@
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless page_title contains shop_name %} &ndash; {{ shop_name }}{% endunless -%}
     </title>
 
     {% if page_description %}
@@ -26,7 +27,7 @@
     <meta property="og:title" content="{{ page_title | escape }}">
     <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
     <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:site_name" content="{{ shop.name | escape }}">
+    <meta property="og:site_name" content="{{ shop_name | escape }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page_title | escape }}">
     <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
