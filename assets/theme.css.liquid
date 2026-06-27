@@ -1003,3 +1003,39 @@ select.PI__select {
   border-bottom: 1px solid var(--color-primary);
   padding-bottom: 2px;
 }
+
+/* Size Chart Table Styling */
+.size-chart-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 15px 0 10px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.size-chart-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+  color: var(--color-primary);
+  font-family: var(--font-body);
+}
+
+.size-chart-table th, 
+.size-chart-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.size-chart-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.size-chart-table tr:hover {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+

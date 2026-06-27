@@ -905,6 +905,53 @@
         font-size: 11px;
         color: #ccc;
       }
+
+      .footer-socials {
+        display: flex;
+        gap: 25px;
+        font-size: 14px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      .social-link:hover {
+        color: var(--color-accent);
+      }
+
+      /* Size Chart Table Styling */
+      .size-chart-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        margin: 15px 0 10px 0;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .size-chart-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 13px;
+        color: var(--color-primary);
+        font-family: var(--font-body);
+      }
+
+      .size-chart-table th, 
+      .size-chart-table td {
+        padding: 8px 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .size-chart-table th {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      .size-chart-table tr:hover {
+        background-color: rgba(0, 0, 0, 0.01);
+      }
       
       /* Password Locked Page Styles */
       .template-password {
@@ -1299,6 +1346,119 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="product-desc-accordion" style="margin-top: 0; border-top: none;">
+                  <button type="button" class="desc-accordion-toggle" onclick="toggleAccordion(this)">SIZE CHART</button>
+                  <div class="desc-accordion-content">
+                    <div class="desc-text">
+                      <div class="size-chart-table-wrapper">
+                        <table class="size-chart-table">
+                          <thead>
+                            <tr>
+                              <th>Part</th>
+                              <th>S</th>
+                              <th>M</th>
+                              <th>L</th>
+                              <th>XL</th>
+                              <th>2XL</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Chest (半胸围)</td>
+                              <td>64</td>
+                              <td>66</td>
+                              <td>68</td>
+                              <td>70</td>
+                              <td>72</td>
+                            </tr>
+                            <tr>
+                              <td>Length (衣长)</td>
+                              <td>62</td>
+                              <td>64</td>
+                              <td>66</td>
+                              <td>68</td>
+                              <td>70</td>
+                            </tr>
+                            <tr>
+                              <td>Sleeve Length (袖长)</td>
+                              <td>52</td>
+                              <td>53</td>
+                              <td>54</td>
+                              <td>55</td>
+                              <td>56</td>
+                            </tr>
+                            <tr>
+                              <td>Drop Shoulder (小肩)</td>
+                              <td>26.8</td>
+                              <td>27.4</td>
+                              <td>28</td>
+                              <td>28.6</td>
+                              <td>29.2</td>
+                            </tr>
+                            <tr>
+                              <td>Neck Width (领宽)</td>
+                              <td>28</td>
+                              <td>29</td>
+                              <td>30</td>
+                              <td>31</td>
+                              <td>32</td>
+                            </tr>
+                            <tr>
+                              <td>Hood Length (帽高)</td>
+                              <td>37.5</td>
+                              <td>38.5</td>
+                              <td>39.5</td>
+                              <td>40.5</td>
+                              <td>41.5</td>
+                            </tr>
+                            <tr>
+                              <td>Hood Width (帽宽)</td>
+                              <td>29.9</td>
+                              <td>30.7</td>
+                              <td>31.5</td>
+                              <td>32.3</td>
+                              <td>33.1</td>
+                            </tr>
+                            <tr>
+                              <td>Zipper Length (拉链)</td>
+                              <td>55.4</td>
+                              <td>57.3</td>
+                              <td>59</td>
+                              <td>60.7</td>
+                              <td>62.4</td>
+                            </tr>
+                            <tr>
+                              <td>1/2 Bottom (1/2 脚围)</td>
+                              <td>47</td>
+                              <td>49</td>
+                              <td>51</td>
+                              <td>53</td>
+                              <td>55</td>
+                            </tr>
+                            <tr>
+                              <td>1/2 Bicep (袖胖)</td>
+                              <td>22</td>
+                              <td>23</td>
+                              <td>24</td>
+                              <td>25</td>
+                              <td>26</td>
+                            </tr>
+                            <tr>
+                              <td>Cuff Opening (袖口)</td>
+                              <td>10</td>
+                              <td>11</td>
+                              <td>12</td>
+                              <td>13</td>
+                              <td>14</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <p style="font-size: 11px; margin-top: 10px; color: #777; text-align: center;">* All measurements are in centimeters (cm).</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1385,7 +1545,10 @@
                 <li><a href="#" onclick="alert('Privacy policy: GDPR compliant. We do not sell your personal data.'); return false;">PRIVACY POLICY</a></li>
               </ul>
               <div class="footer-copyright">
-                &copy; 2026 TWOTISM. ALL RIGHTS RESERVED.
+                &copy; 2026 TWOTISM.
+              </div>
+              <div class="footer-socials">
+                <a href="https://www.instagram.com/twotizm" target="_blank" rel="noopener" class="social-link">INSTAGRAM</a>
               </div>
             </div>
           </div>
@@ -1457,8 +1620,8 @@
         const popup = document.getElementById('NewsletterPopup');
         if (!popup) return;
 
-        const hasSubscribed = localStorage.getItem('ei2-popup-subscribed');
-        const hasDismissed = localStorage.getItem('ei2-popup-dismissed');
+        const hasSubscribed = localStorage.getItem('twotism-popup-subscribed');
+        const hasDismissed = localStorage.getItem('twotism-popup-dismissed');
 
         if (!hasSubscribed && !hasDismissed) {
           setTimeout(() => {
@@ -1472,12 +1635,12 @@
 
         window.dismissPopup = function() {
           closePopup();
-          localStorage.setItem('ei2-popup-dismissed', 'true');
+          localStorage.setItem('twotism-popup-dismissed', 'true');
         }
 
         window.handlePopupSubmit = function(e) {
           e.preventDefault();
-          localStorage.setItem('ei2-popup-subscribed', 'true');
+          localStorage.setItem('twotism-popup-subscribed', 'true');
           document.getElementById('PopupInputView').style.display = 'none';
           document.getElementById('PopupSuccessView').style.display = 'block';
         }

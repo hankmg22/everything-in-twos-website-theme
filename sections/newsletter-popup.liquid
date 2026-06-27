@@ -16,7 +16,7 @@
               <button type="button" class="popup-action-btn close-popup-success" id="PopupSuccessClose">START SHOPPING</button>
             </div>
             <script>
-              localStorage.setItem('ei2-popup-subscribed', 'true');
+              localStorage.setItem('twotism-popup-subscribed', 'true');
             </script>
           {%- else -%}
             <div class="popup-input-view">
@@ -213,8 +213,8 @@
       const popup = document.getElementById('NewsletterPopup');
       if (!popup) return;
 
-      const hasSubscribed = localStorage.getItem('ei2-popup-subscribed');
-      const hasDismissed = localStorage.getItem('ei2-popup-dismissed');
+      const hasSubscribed = localStorage.getItem('twotism-popup-subscribed');
+      const hasDismissed = localStorage.getItem('twotism-popup-dismissed');
       
       const urlParams = new URLSearchParams(window.location.search);
       const isPostedSuccess = urlParams.get('customer_posted') === 'true' || 
@@ -222,7 +222,7 @@
 
       if (isPostedSuccess) {
         popup.style.display = 'flex';
-        localStorage.setItem('ei2-popup-subscribed', 'true');
+        localStorage.setItem('twotism-popup-subscribed', 'true');
         
         if (urlParams.get('customer_posted') === 'true') {
           const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
@@ -241,7 +241,7 @@
 
       function dismissPopup() {
         closePopup();
-        localStorage.setItem('ei2-popup-dismissed', 'true');
+        localStorage.setItem('twotism-popup-dismissed', 'true');
       }
 
       document.getElementById('PopupCloseBtn')?.addEventListener('click', dismissPopup);

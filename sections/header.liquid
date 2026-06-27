@@ -3,8 +3,9 @@
     <div class="header-left-empty"></div> <!-- Left column spacer to push logo center -->
 
     <div class="header-center-logo">
+      {%- assign shop_name = shop.name | replace: 'everythingintwos', 'TwoTism' | replace: 'Everythingintwos', 'TwoTism' | replace: 'EverythingIntwos', 'TwoTism' | replace: 'everything-in-twos', 'TwoTism' | replace: 'Everything In Twos', 'TwoTism' | replace: 'Everything in Twos', 'TwoTism' | replace: 'EVERYTHINGINTWOS', 'TWOTISM' -%}
       <a href="{{ routes.root_url }}" class="header-logo-link">
-        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="header-logo-default" width="380" height="auto">
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop_name }}" class="header-logo-default" width="380" height="auto">
       </a>
     </div>
 
