@@ -1039,3 +1039,30 @@ select.PI__select {
   background-color: rgba(0, 0, 0, 0.01);
 }
 
+/* Unit Toggle Switch */
+.size-chart-toggle-wrapper {
+  display: inline-flex;
+  border: 1px solid var(--color-primary);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0 15px 0;
+}
+
+.unit-toggle-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.unit-toggle-btn.active {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+
