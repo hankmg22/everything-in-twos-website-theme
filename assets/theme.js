@@ -253,3 +253,34 @@ function initAccordions() {
     }
   });
 }
+
+/* Size Chart Unit Toggle Listener */
+document.addEventListener('click', function(e) {
+  const toggleBtn = e.target.closest('.unit-toggle-btn');
+  if (!toggleBtn) return;
+  
+  const container = toggleBtn.closest('.product-desc-accordion');
+  if (!container) return;
+  
+  container.querySelectorAll('.unit-toggle-btn').forEach(btn => btn.classList.remove('active'));
+  toggleBtn.classList.add('active');
+  
+  const unit = toggleBtn.getAttribute('data-unit');
+  const cmTable = container.querySelector('.size-chart-table.unit-cm');
+  const inchTable = container.querySelector('.size-chart-table.unit-inch');
+  const content = container.querySelector('.desc-accordion-content');
+  
+  if (unit === 'cm') {
+    if (cmTable) cmTable.style.display = 'table';
+    if (inchTable) inchTable.style.display = 'none';
+  } else {
+    if (cmTable) cmTable.style.display = 'none';
+    if (inchTable) inchTable.style.display = 'table';
+  }
+  
+  // Update accordion height to prevent clipping
+  if (content && container.classList.contains('active')) {
+    content.style.maxHeight = content.scrollHeight + 'px';
+  }
+});
+

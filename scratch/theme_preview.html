@@ -952,6 +952,32 @@
       .size-chart-table tr:hover {
         background-color: rgba(0, 0, 0, 0.01);
       }
+
+      /* Unit Toggle Switch */
+      .size-chart-toggle-wrapper {
+        display: inline-flex;
+        border: 1px solid var(--color-primary);
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 10px 0 15px 0;
+      }
+
+      .unit-toggle-btn {
+        background: none;
+        border: none;
+        font-family: var(--font-body);
+        font-size: 12px;
+        padding: 6px 16px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        color: var(--color-primary);
+        text-transform: uppercase;
+      }
+
+      .unit-toggle-btn.active {
+        background-color: var(--color-primary);
+        color: var(--color-bg);
+      }
       
       /* Password Locked Page Styles */
       .template-password {
@@ -1351,8 +1377,15 @@
                   <button type="button" class="desc-accordion-toggle" onclick="toggleAccordion(this)">SIZE CHART</button>
                   <div class="desc-accordion-content">
                     <div class="desc-text">
+                      
+                      <div class="size-chart-toggle-wrapper">
+                        <button type="button" class="unit-toggle-btn active" data-unit="cm">CM</button>
+                        <button type="button" class="unit-toggle-btn" data-unit="inch">INCH</button>
+                      </div>
+
                       <div class="size-chart-table-wrapper">
-                        <table class="size-chart-table">
+                        <!-- CM Table -->
+                        <table class="size-chart-table unit-cm">
                           <thead>
                             <tr>
                               <th>Part</th>
@@ -1365,7 +1398,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td>Chest (半胸围)</td>
+                              <td>Chest</td>
                               <td>64</td>
                               <td>66</td>
                               <td>68</td>
@@ -1373,31 +1406,7 @@
                               <td>72</td>
                             </tr>
                             <tr>
-                              <td>Length (衣长)</td>
-                              <td>62</td>
-                              <td>64</td>
-                              <td>66</td>
-                              <td>68</td>
-                              <td>70</td>
-                            </tr>
-                            <tr>
-                              <td>Sleeve Length (袖长)</td>
-                              <td>52</td>
-                              <td>53</td>
-                              <td>54</td>
-                              <td>55</td>
-                              <td>56</td>
-                            </tr>
-                            <tr>
-                              <td>Drop Shoulder (小肩)</td>
-                              <td>26.8</td>
-                              <td>27.4</td>
-                              <td>28</td>
-                              <td>28.6</td>
-                              <td>29.2</td>
-                            </tr>
-                            <tr>
-                              <td>Neck Width (领宽)</td>
+                              <td>Neck Width</td>
                               <td>28</td>
                               <td>29</td>
                               <td>30</td>
@@ -1405,7 +1414,39 @@
                               <td>32</td>
                             </tr>
                             <tr>
-                              <td>Hood Length (帽高)</td>
+                              <td>Sleeve Shoulder Opening</td>
+                              <td>26</td>
+                              <td>27</td>
+                              <td>28</td>
+                              <td>29</td>
+                              <td>30</td>
+                            </tr>
+                            <tr>
+                              <td>Length</td>
+                              <td>62</td>
+                              <td>64</td>
+                              <td>66</td>
+                              <td>68</td>
+                              <td>70</td>
+                            </tr>
+                            <tr>
+                              <td>Sleeve Length</td>
+                              <td>52</td>
+                              <td>53</td>
+                              <td>54</td>
+                              <td>55</td>
+                              <td>56</td>
+                            </tr>
+                            <tr>
+                              <td>Drop Shoulder</td>
+                              <td>26.8</td>
+                              <td>27.4</td>
+                              <td>28</td>
+                              <td>28.6</td>
+                              <td>29.2</td>
+                            </tr>
+                            <tr>
+                              <td>Hood Length</td>
                               <td>37.5</td>
                               <td>38.5</td>
                               <td>39.5</td>
@@ -1413,49 +1454,96 @@
                               <td>41.5</td>
                             </tr>
                             <tr>
-                              <td>Hood Width (帽宽)</td>
+                              <td>Hood Width</td>
                               <td>29.9</td>
                               <td>30.7</td>
                               <td>31.5</td>
                               <td>32.3</td>
                               <td>33.1</td>
                             </tr>
+                          </tbody>
+                        </table>
+
+                        <!-- INCH Table -->
+                        <table class="size-chart-table unit-inch" style="display: none;">
+                          <thead>
                             <tr>
-                              <td>Zipper Length (拉链)</td>
-                              <td>55.4</td>
-                              <td>57.3</td>
-                              <td>59</td>
-                              <td>60.7</td>
-                              <td>62.4</td>
+                              <th>Part</th>
+                              <th>S</th>
+                              <th>M</th>
+                              <th>L</th>
+                              <th>XL</th>
+                              <th>2XL</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Chest</td>
+                              <td>25.2</td>
+                              <td>26.0</td>
+                              <td>26.8</td>
+                              <td>27.6</td>
+                              <td>28.3</td>
                             </tr>
                             <tr>
-                              <td>1/2 Bottom (1/2 脚围)</td>
-                              <td>47</td>
-                              <td>49</td>
-                              <td>51</td>
-                              <td>53</td>
-                              <td>55</td>
+                              <td>Neck Width</td>
+                              <td>11.0</td>
+                              <td>11.4</td>
+                              <td>11.8</td>
+                              <td>12.2</td>
+                              <td>12.6</td>
                             </tr>
                             <tr>
-                              <td>1/2 Bicep (袖胖)</td>
-                              <td>22</td>
-                              <td>23</td>
-                              <td>24</td>
-                              <td>25</td>
-                              <td>26</td>
+                              <td>Sleeve Shoulder Opening</td>
+                              <td>10.2</td>
+                              <td>10.6</td>
+                              <td>11.0</td>
+                              <td>11.4</td>
+                              <td>11.8</td>
                             </tr>
                             <tr>
-                              <td>Cuff Opening (袖口)</td>
-                              <td>10</td>
-                              <td>11</td>
-                              <td>12</td>
-                              <td>13</td>
-                              <td>14</td>
+                              <td>Length</td>
+                              <td>24.4</td>
+                              <td>25.2</td>
+                              <td>26.0</td>
+                              <td>26.8</td>
+                              <td>27.6</td>
+                            </tr>
+                            <tr>
+                              <td>Sleeve Length</td>
+                              <td>20.5</td>
+                              <td>20.9</td>
+                              <td>21.3</td>
+                              <td>21.7</td>
+                              <td>22.0</td>
+                            </tr>
+                            <tr>
+                              <td>Drop Shoulder</td>
+                              <td>10.6</td>
+                              <td>10.8</td>
+                              <td>11.0</td>
+                              <td>11.3</td>
+                              <td>11.5</td>
+                            </tr>
+                            <tr>
+                              <td>Hood Length</td>
+                              <td>14.8</td>
+                              <td>15.2</td>
+                              <td>15.6</td>
+                              <td>15.9</td>
+                              <td>16.3</td>
+                            </tr>
+                            <tr>
+                              <td>Hood Width</td>
+                              <td>11.8</td>
+                              <td>12.1</td>
+                              <td>12.4</td>
+                              <td>12.7</td>
+                              <td>13.0</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-                      <p style="font-size: 11px; margin-top: 10px; color: #777; text-align: center;">* All measurements are in centimeters (cm).</p>
                     </div>
                   </div>
                 </div>
