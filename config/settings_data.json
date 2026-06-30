@@ -3,14 +3,18 @@
     "color_bg": "#ffffff",
     "color_text": "#111111",
     "color_accent": "#39FF14",
-    "social_instagram_link": "https://www.instagram.com/twotizm"
+    "social_instagram_link": "https://www.instagram.com/twotizm",
+    "enable_sound_effects": true,
+    "sound_effects_volume": 50
   },
   "presets": {
     "Default": {
       "color_bg": "#ffffff",
       "color_text": "#111111",
       "color_accent": "#39FF14",
-      "social_instagram_link": "https://www.instagram.com/twotizm"
+      "social_instagram_link": "https://www.instagram.com/twotizm",
+      "enable_sound_effects": true,
+      "sound_effects_volume": 50
     }
   }
 }

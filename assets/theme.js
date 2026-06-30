@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initAjaxCart();
   initAccordions();
   initCartDrawerEvents();
+  initSoundEffects();
 });
 
 /* Sizing dropdown & variant matching */
@@ -283,4 +284,104 @@ document.addEventListener('click', function(e) {
     content.style.maxHeight = content.scrollHeight + 'px';
   }
 });
+
+/* Interactive Click Sound Effects (Web Audio API Synthesizer) */
+function initSoundEffects() {
+  const settings = window.themeSettings || { enableSoundEffects: true, soundEffectsVolume: 50 };
+  if (!settings.enableSoundEffects) return;
+
+  let audioCtx = null;
+  const volumeScale = (settings.soundEffectsVolume || 50) / 100;
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playClickSound(type = 'default') {
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+
+      if (type === 'special') {
+        // Satisfying chime / success sound: quick double-tap (high-pitch sliding up)
+        const playBeep = (timeOffset, pitch, dur) => {
+          const osc = ctx.createOscillator();
+          const gainNode = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(pitch, now + timeOffset);
+          osc.frequency.exponentialRampToValueAtTime(pitch * 1.5, now + timeOffset + dur);
+
+          gainNode.gain.setValueAtTime(0.001, now + timeOffset);
+          gainNode.gain.linearRampToValueAtTime(0.08 * volumeScale, now + timeOffset + 0.01);
+          gainNode.gain.exponentialRampToValueAtTime(0.001, now + timeOffset + dur);
+
+          osc.connect(gainNode);
+          gainNode.connect(ctx.destination);
+
+          osc.start(now + timeOffset);
+          osc.stop(now + timeOffset + dur);
+        };
+
+        playBeep(0, 600, 0.08);
+        playBeep(0.07, 900, 0.12);
+      } else {
+        // Chess Click: A sharp woody transient and lower resonant body
+        const bodyOsc = ctx.createOscillator();
+        const bodyGain = ctx.createGain();
+        bodyOsc.type = 'triangle';
+        bodyOsc.frequency.setValueAtTime(380, now);
+        bodyOsc.frequency.exponentialRampToValueAtTime(140, now + 0.04);
+
+        bodyGain.gain.setValueAtTime(0.001, now);
+        bodyGain.gain.linearRampToValueAtTime(0.25 * volumeScale, now + 0.003);
+        bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+        bodyOsc.connect(bodyGain);
+        bodyGain.connect(ctx.destination);
+        bodyOsc.start(now);
+        bodyOsc.stop(now + 0.04);
+
+        const transientOsc = ctx.createOscillator();
+        const transientGain = ctx.createGain();
+        transientOsc.type = 'sine';
+        transientOsc.frequency.setValueAtTime(1200, now);
+        transientOsc.frequency.exponentialRampToValueAtTime(800, now + 0.006);
+
+        transientGain.gain.setValueAtTime(0.001, now);
+        transientGain.gain.linearRampToValueAtTime(0.08 * volumeScale, now + 0.001);
+        transientGain.gain.exponentialRampToValueAtTime(0.001, now + 0.006);
+
+        transientOsc.connect(transientGain);
+        transientGain.connect(ctx.destination);
+        transientOsc.start(now);
+        transientOsc.stop(now + 0.006);
+      }
+    } catch (e) {
+      console.warn('Web Audio playback error:', e);
+    }
+  }
+
+  // Bind click listeners globally using event delegation
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('a, button, input[type="submit"], input[type="button"], .qty-adjust-btn, .desc-accordion-toggle, .unit-toggle-btn, .PI__select, .ProductGridItem');
+    if (!target) return;
+
+    // Check for special buttons (cart actions, qty, etc.)
+    const isSpecial = target.classList.contains('add-to-cart-submit-btn') || 
+                      target.closest('.cart-drawer-checkout-btn') || 
+                      target.closest('.qty-adjust-btn') ||
+                      target.closest('.cart-drawer-item-remove-link');
+
+    playClickSound(isSpecial ? 'special' : 'default');
+  }, { passive: true });
+}
 
