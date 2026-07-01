@@ -61,6 +61,13 @@
     {% section 'cart-drawer' %}
     {% section 'newsletter-popup' %}
 
+    <script>
+      window.themeSettings = {
+        enableSoundEffects: {{ settings.enable_sound_effects | default: true | json }},
+        soundEffectsVolume: {{ settings.sound_effects_volume | default: 50 | json }}
+      };
+    </script>
+
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

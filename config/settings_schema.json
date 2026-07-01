@@ -39,5 +39,26 @@
         "label": "Instagram Link"
       }
     ]
+  },
+  {
+    "name": "Sound Effects",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_sound_effects",
+        "label": "Enable Click Sound Effects",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "sound_effects_volume",
+        "min": 10,
+        "max": 100,
+        "step": 10,
+        "unit": "%",
+        "label": "Sound Volume",
+        "default": 50
+      }
+    ]
   }
 ]
