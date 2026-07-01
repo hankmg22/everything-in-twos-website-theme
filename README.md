@@ -2,7 +2,7 @@
 
 This repository holds the design and code for the [Two Tizm](https://twotizm.myshopify.com) online store. It controls how the site looks and behaves — the layout, colors, product pages, shopping cart, and all the little interactions shoppers experience.
 
-<!-- SCREENSHOT: add a screenshot of the homepage here, e.g. ![Two Tizm homepage](screenshot.png) -->
+![Two Tizm homepage](screenshot.png)
 
 
 ## What's in here
